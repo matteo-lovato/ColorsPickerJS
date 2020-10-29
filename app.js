@@ -30,10 +30,22 @@ function randomColors() {
     const randomColor = generateHex();
 
     // add colors to the background
-
     div.style.backgroundColor = randomColor;
     hexText.innerText = randomColor;
+
+    //check for contrast
+    checkTextContrast(randomColor, hexText);
   });
+}
+
+// check if i can read the text whit that background
+function checkTextContrast(color, text) {
+  const luminance = chroma(color).luminance();
+  if (luminance > 0.5) {
+    text.style.color = "black";
+  } else {
+    text.style.color = "white";
+  }
 }
 
 randomColors();
