@@ -78,7 +78,7 @@ function colorizeSliders(color, hue, brightness, saturation) {
   )}, ${scaleBright(0.5)}, ${scaleBright(1)})`;
 
   //Hue is always the same all the colors
-  hue.style.backgroundImage = `linear-gradient(to right, rgb(204,75,75), rgb(204,204,75), rgb(75,204,75),rgb(75,204,204),rgb(75,75,204),rgb(204,75,204))`;
+  hue.style.backgroundImage = `linear-gradient(to right, rgb(204,75,75), rgb(204,204,75), rgb(75,204,75),rgb(75,204,204),rgb(75,75,204),rgb(204,75,204), rgb(204,75,75))`;
 }
 
 randomColors();
