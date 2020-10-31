@@ -68,6 +68,14 @@ function colorizeSliders(color, hue, brightness, saturation) {
   saturation.style.backgroundImage = `linear-gradient(to right, ${scaleSaturation(
     0
   )}, ${scaleSaturation(1)})`;
+
+  //start from black to white i need the only middle part
+  const midBright = color.set("hsl.l", 0.5);
+  //form black to white with all the gradients
+  const scaleBright = chroma.scale(["black", midBright, "white"]);
+  brightness.style.backgroundImage = `linear-gradient(to right, ${scaleBright(
+    0
+  )}, ${scaleBright(0.5)}, ${scaleBright(1)})`;
 }
 
 randomColors();
