@@ -45,10 +45,10 @@ svg {
   padding: 1rem;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
-  pointer-events: none;
-  transform: translateY(100px);
+  /* pointer-events: none; */
+  /* transform: translateY(100px); */
   transition: all 0.5s ease-in-out;
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 .sliders.active {
@@ -113,4 +113,15 @@ svg {
   background: none;
   cursor: pointer;
   margin: 2rem 0rem;
+}
+
+/* Sliders things */
+
+input[type="range"] {
+  -webkit-appearance: none;
+  margin: 1rem 0rem;
+  position: relative;
+  width: 100%;
+  border-radius: 1rem;
+  cursor: pointer;
 }

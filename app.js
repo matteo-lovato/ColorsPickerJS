@@ -35,6 +35,15 @@ function randomColors() {
 
     //check for contrast
     checkTextContrast(randomColor, hexText);
+
+    // initial colorize sliders
+    const color = chroma(randomColor);
+    const sliders = div.querySelectorAll(".sliders input");
+    const hue = sliders[0];
+    const brightness = sliders[1];
+    const saturation = sliders[2];
+
+    colorizeSliders(color, hue, brightness, saturation);
   });
 }
 
@@ -46,6 +55,19 @@ function checkTextContrast(color, text) {
   } else {
     text.style.color = "white";
   }
+}
+
+function colorizeSliders(color, hue, brightness, saturation) {
+  // get the color without saturation
+  const noSaturation = color.set("hsl.s", 0);
+  // get the color with full saturation
+  const fullSaturation = color.set("hsl.s", 1);
+  //scale saturazion
+  const scaleSaturation = chroma.scale([noSaturation, color, fullSaturation]);
+  //update slider color
+  saturation.style.backgroundImage = `linear-gradient(to right, ${scaleSaturation(
+    0
+  )}, ${scaleSaturation(1)})`;
 }
 
 randomColors();
