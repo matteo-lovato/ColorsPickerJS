@@ -80,7 +80,10 @@ function randomColors() {
 
     //check for contrast
     checkTextContrast(randomColor, hexText);
-
+    const icons = div.querySelectorAll(".controls button");
+    for (icon of icons) {
+      checkTextContrast(randomColor, icon);
+    }
     // initial colorize sliders
     const color = chroma(randomColor);
     const sliders = div.querySelectorAll(".sliders input");
