@@ -3,6 +3,7 @@ const colorDivs = document.querySelectorAll(".color");
 const generateBtn = document.querySelector(".generate");
 const sliders = document.querySelectorAll('input[type="range"]');
 const currentHexs = document.querySelectorAll(".color h2");
+const popup = document.querySelector(".copy-container");
 // array to save colors
 // otherwise saturation will brake the magic
 let initialColors;
@@ -17,6 +18,19 @@ colorDivs.forEach((div, index) => {
   div.addEventListener("change", () => {
     updateTextUI(index);
   });
+});
+
+//clicking hex color copies to clipboard
+currentHexs.forEach((hex) => {
+  hex.addEventListener("click", () => {
+    copyToClipboard(hex);
+  });
+});
+
+popup.addEventListener("transitionend", () => {
+  const popupBox = popup.children[0];
+  popup.classList.remove("active");
+  popupBox.classList.remove("active");
 });
 
 // functions
@@ -161,6 +175,26 @@ function resetInputs() {
       slider.value = Math.floor(brightValue * 100) / 100;
     }
   });
+}
+
+function copyToClipboard(hex) {
+  // copy function from text doesn't exist
+  // create a temporary text area
+  const element = document.createElement("textarea");
+  //copy hexColor text to textarea
+  element.value = hex.innerText;
+  //append textarea to body
+  document.body.appendChild(element);
+  // select the textarea
+  element.select();
+  // execute command copy to clipboard
+  document.execCommand("copy");
+  // destroy temporary textarea
+  document.body.removeChild(element);
+  // popupanimation
+  const popupBox = popup.children[0];
+  popup.classList.add("active");
+  popupBox.classList.add("active");
 }
 
 randomColors();
