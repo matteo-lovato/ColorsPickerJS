@@ -62,6 +62,8 @@ function randomColors() {
 
     colorizeSliders(color, hue, brightness, saturation);
   });
+  // update sliders cursor
+  resetInputs();
 }
 
 // check if i can read the text whit that background
@@ -129,6 +131,33 @@ function updateTextUI(index) {
   for (icon of icons) {
     checkTextContrast(color, icon);
   }
+}
+
+function resetInputs() {
+  const sliders = document.querySelectorAll(".sliders input");
+  // grab all the sliders
+  sliders.forEach((slider) => {
+    // for each slider filter if it's hue, saturation or brightness slider
+    if (slider.name === "hue") {
+      // get which color is changing
+      const hueColor = initialColors[slider.getAttribute("data-hue")];
+      // get the hue of the color I changed
+      const hueValue = chroma(hueColor).hsl()[0];
+      // set cursor to the color number
+      slider.value = Math.floor(hueValue);
+    }
+    if (slider.name === "saturation") {
+      const satColor = initialColors[slider.getAttribute("data-sat")];
+      const satValue = chroma(satColor).hsl()[1];
+      // rounding numbers
+      slider.value = Math.floor(satValue * 100) / 100;
+    }
+    if (slider.name === "brightness") {
+      const brightColor = initialColors[slider.getAttribute("data-bright")];
+      const brightValue = chroma(brightColor).hsl()[2];
+      slider.value = Math.floor(brightValue * 100) / 100;
+    }
+  });
 }
 
 randomColors();
