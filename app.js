@@ -11,6 +11,14 @@ const sliderContainer = document.querySelectorAll(".sliders");
 // array to save colors
 // otherwise saturation will brake the magic
 let initialColors;
+// object for local storage
+let savePalettes = [];
+//save to local storage
+const saveButton = document.querySelector(".save");
+const submitSave = document.querySelector(".submit-save");
+const closeSave = document.querySelector(".close-save");
+const saveContainer = document.querySelector(".save-container");
+const saveInput = document.querySelector(".save-container input");
 
 //Event listener
 
@@ -54,6 +62,11 @@ lockButtons.forEach((button, index) => {
     lockColor(button, index);
   });
 });
+
+//save to local storage
+saveButton.addEventListener("click", openPalette);
+closeSave.addEventListener("click", closePalette);
+
 // functions
 
 // generate colors
@@ -241,6 +254,18 @@ function lockColor(button, index) {
   colorDivs[index].classList.toggle("locked");
   lockButtons[index].firstChild.classList.toggle("fa-lock-open");
   lockButtons[index].firstChild.classList.toggle("fa-lock");
+}
+
+// save to local storage
+function openPalette() {
+  const popup = saveContainer.children[0];
+  saveContainer.classList.add("active");
+  popup.classList.add("active");
+}
+function closePalette() {
+  const popup = saveContainer.children[0];
+  saveContainer.classList.remove("active");
+  popup.classList.remove("active");
 }
 
 randomColors();
