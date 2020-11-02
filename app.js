@@ -80,6 +80,7 @@ function randomColors() {
 
     //check for contrast
     checkTextContrast(randomColor, hexText);
+    // check icons contrast
     const icons = div.querySelectorAll(".controls button");
     for (icon of icons) {
       checkTextContrast(randomColor, icon);
