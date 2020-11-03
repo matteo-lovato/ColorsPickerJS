@@ -227,6 +227,29 @@ function resetInputs() {
       const brightValue = chroma(brightColor).hsl()[2];
       slider.value = Math.floor(brightValue * 100) / 100;
     }
+    // sliders are all the input range
+    sliders.forEach((slider) => {
+      const index =
+        slider.getAttribute("data-bright") ||
+        slider.getAttribute("data-sat") ||
+        slider.getAttribute("data-hue");
+      // sliderConatiner is the block of slider for each color
+      let slidersContainer = slider.parentElement.querySelectorAll(
+        'input[type="range"]'
+      );
+      const hue = slidersContainer[0];
+      const brightness = slidersContainer[1];
+      const saturation = slidersContainer[2];
+
+      const bgColor = initialColors[index];
+      let color = chroma(bgColor)
+        .set("hsl.s", saturation.value)
+        .set("hsl.l", brightness.value)
+        .set("hsl.h", hue.value);
+
+      // update sliders background upon changing color
+      colorizeSliders(color, hue, brightness, saturation);
+    });
   });
 }
 
