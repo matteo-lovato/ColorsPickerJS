@@ -12,14 +12,13 @@ const sliderContainer = document.querySelectorAll(".sliders");
 // otherwise saturation will brake the magic
 let initialColors;
 // object for local storage
-let savePalettes = [];
+let savedPalettes = [];
 //save to local storage
 const saveButton = document.querySelector(".save");
 const submitSave = document.querySelector(".submit-save");
 const closeSave = document.querySelector(".close-save");
 const saveContainer = document.querySelector(".save-container");
 const saveInput = document.querySelector(".save-container input");
-const savedPalettes = [];
 //library
 const libraryContainer = document.querySelector(".library-container");
 const libraryBtn = document.querySelector(".library");
@@ -286,7 +285,14 @@ function savePalette(e) {
     colors.push(hex.innerText);
   });
   //generate object to push in local storage
-  let paletteNr = savedPalettes.length;
+  let paletteNr;
+  const paletteOjects = JSON.parse(localStorage.getItem("palettes"));
+  if (paletteOjects === null) {
+    paletteNr = savedPalettes.length;
+  } else {
+    paletteNr = paletteOjects.length;
+  }
+
   const paletteObj = { name, colors, nr: paletteNr };
   savedPalettes.push(paletteObj);
   // save to local sorage
@@ -351,10 +357,11 @@ function closeLibrary() {
 }
 
 function getLocal() {
-  if (localStorage.getItem("palettes") === null) {
+  const paletteOjects = JSON.parse(localStorage.getItem("palettes"));
+  if (paletteOjects === null) {
     localPalettes = [];
   } else {
-    const paletteOjects = JSON.parse(localStorage.getItem("palettes"));
+    savedPalettes = [...paletteOjects];
     paletteOjects.forEach((paletteObj) => {
       const palette = document.createElement("div");
       palette.classList.add("custom-palette");
