@@ -1,6 +1,6 @@
 # COLOR PICKER PROJECT
 
-Live at [![Netlify Status](https://api.netlify.com/api/v1/badges/a59b66da-4d0b-4aac-b4c5-877c17b123d0/deploy-status)](stoic-franklin-f7b597.netlify.app)
+Live at [![Netlify Status](https://api.netlify.com/api/v1/badges/a59b66da-4d0b-4aac-b4c5-877c17b123d0/deploy-status)](https://stoic-franklin-f7b597.netlify.app)
 
 It's a simple palette picker where you can:
 
